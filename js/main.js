@@ -1,27 +1,29 @@
-const options = document.querySelectorAll(".option");
-const backgrounds = document.querySelectorAll(".bg");
-
-options.forEach((option, index) => {
-
-  option.addEventListener("mouseenter", () => {
-    backgrounds.forEach(bg => {
-      bg.style.opacity = "0.3";
-      bg.style.filter = "saturate(50%)";
+document.addEventListener('DOMContentLoaded', function() {
+    const optionRows = document.querySelectorAll('.option-row');
+    
+    // Her seçeneğe tıklama olayı ekle
+    optionRows.forEach(row => {
+        row.addEventListener('click', function() {
+            const link = this.getAttribute('data-link');
+            
+            // Kısa bir animasyon için aktif sınıfını ekle
+            optionRows.forEach(r => r.classList.remove('active'));
+            this.classList.add('active');
+            
+            // 300ms sonra linke git (animasyonu görmek için)
+            setTimeout(() => {
+                window.location.href = link;
+            }, 300);
+        });
+        
+        // Klavye erişilebilirliği için
+        row.addEventListener('keypress', function(e) {
+            if (e.key === 'Enter' || e.key === ' ') {
+                this.click();
+            }
+        });
+        
+        // Tab tuşu ile odaklanma
+        row.setAttribute('tabindex', '0');
     });
-
-    backgrounds[index].style.opacity = "1";
-    backgrounds[index].style.filter = "saturate(120%)";
-  });
-
-  option.addEventListener("mouseleave", () => {
-    backgrounds.forEach(bg => {
-      bg.style.opacity = "0.3";
-      bg.style.filter = "saturate(50%)";
-    });
-  });
-
-  option.addEventListener("click", () => {
-    window.location.href = option.dataset.link;
-  });
-
 });
