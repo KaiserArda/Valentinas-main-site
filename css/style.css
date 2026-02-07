@@ -1,115 +1,62 @@
 * {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
 }
 
 body {
-    background-color: #000;
-    font-family: Arial, sans-serif;
-    padding: 20px;
-    color: #fff;
-    min-height: 100vh;
-    display: flex;
-    align-items: center;
-    justify-content: center;
+  height: 100vh;
+  overflow: hidden;
+  font-family: Arial, sans-serif;
 }
 
-.table-container {
-    max-width: 600px;
-    width: 100%;
-    margin: 0 auto;
+/* Arka plan */
+#background {
+  display: flex;
+  height: 100%;
+  width: 100%;
+  position: absolute;
+  z-index: 1;
 }
 
-.category-table {
-    width: 100%;
-    border-collapse: collapse;
-    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.5);
+.panel {
+  flex: 1;
+  transition: filter 0.4s ease;
+  filter: saturate(40%) brightness(85%);
 }
 
-.category-table th,
-.category-table td {
-    padding: 20px;
-    text-align: left;
-    border-bottom: 1px solid #333;
-    transition: all 0.3s ease;
+/* Renkler */
+.blue { background: #0099ff; }
+.green { background: #22b455; }
+.pink { background: #ffb3c7; }
+
+/* Ortadaki seçenekler */
+#options {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  display: flex;
+  gap: 40px;
+  z-index: 2;
 }
 
-.category-table th {
-    background-color: rgba(50, 50, 50, 0.7);
-    font-weight: bold;
-    color: #ccc;
-    font-size: 1.1em;
+.option {
+  width: 140px;
+  height: 140px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-decoration: none;
+  color: white;
+  font-size: 18px;
+  border-radius: 20px;
+  backdrop-filter: blur(6px);
+  background: rgba(0,0,0,0.25);
+  transition: transform 0.3s ease, background 0.3s ease;
 }
 
-.option-row {
-    background-color: rgba(100, 100, 100, 0.3);
-    cursor: pointer;
-    transition: all 0.3s ease;
-}
-
-.option-row td {
-    color: #aaa;
-    font-size: 1em;
-}
-
-/* Soluk renkler - varsayılan durum */
-.option-row:nth-child(1) {
-    background-color: rgba(255, 100, 100, 0.2);
-}
-.option-row:nth-child(2) {
-    background-color: rgba(100, 255, 100, 0.2);
-}
-.option-row:nth-child(3) {
-    background-color: rgba(100, 100, 255, 0.2);
-}
-
-/* Canlı renkler - hover durumu */
-.option-row:hover:nth-child(1) {
-    background-color: rgba(255, 100, 100, 0.8);
-    transform: scale(1.02);
-}
-.option-row:hover:nth-child(2) {
-    background-color: rgba(100, 255, 100, 0.8);
-    transform: scale(1.02);
-}
-.option-row:hover:nth-child(3) {
-    background-color: rgba(100, 100, 255, 0.8);
-    transform: scale(1.02);
-}
-
-.option-row:hover td {
-    color: #fff;
-    font-weight: bold;
-}
-
-/* Tıklanmış seçenek için stiller */
-.option-row.active {
-    background-color: rgba(255, 255, 255, 0.9);
-}
-
-.option-row.active:nth-child(1) {
-    background-color: rgba(255, 100, 100, 0.95);
-}
-.option-row.active:nth-child(2) {
-    background-color: rgba(100, 255, 100, 0.95);
-}
-.option-row.active:nth-child(3) {
-    background-color: rgba(100, 100, 255, 0.95);
-}
-
-.option-row.active td {
-    color: #000;
-    font-weight: bold;
-}
-
-/* Animasyon için */
-@keyframes pulse {
-    0% { transform: scale(1); }
-    50% { transform: scale(1.05); }
-    100% { transform: scale(1); }
-}
-
-.option-row:active {
-    animation: pulse 0.2s ease;
+.option:hover {
+  transform: scale(1.1);
+  background: rgba(0,0,0,0.45);
 }
